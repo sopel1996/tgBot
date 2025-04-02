@@ -34,7 +34,7 @@ bot.on("message", async (ctx) => {
 
 
     // const stickerId = 'CAACAgIAAxkBAAEYxY9hQMT6umJxCEzi9LMa3I96F10zPQACWgEAAkgfiV-Dc03mMkC89ysE'; // Пример ID стикера
-    ctx.replyWithAnimation('CgACAgQAAxkBAAIBDWftOxDsR53yqmU-lV7bTsnYqmvpAAIBAwACkjoFU8sQ41jq3iuhNgQ'); // Отправка стикера
+    // ctx.replyWithAnimation('CgACAgQAAxkBAAIBDWftOxDsR53yqmU-lV7bTsnYqmvpAAIBAwACkjoFU8sQ41jq3iuhNgQ'); // Отправка стикера
 
     
     console.log('ctx',ctx.message)
@@ -70,7 +70,7 @@ bot.on("message", async (ctx) => {
     );
 
     const job = schedule.scheduleJob(dateToJob, function () {
-      sendMessage(chatId, "qweqweqweqwe")
+      sendMessage(chatId, "Подключаемся!!!")
         .then(() => {
           console.log("Сообщение отправлено успешно!");
         })
@@ -81,7 +81,7 @@ bot.on("message", async (ctx) => {
 
     await ctx.reply(`Установлено напоминание о митапе ${date} в ${time}`);
   } else {
-    await ctx.reply("Не дата");
+    await ctx.reply("Не введена дата или введена дата в неверном формате. \nНеобходимо ввести дату в формате DD.MM.YYYY HH:MM");
   }
 });
 
@@ -98,13 +98,13 @@ function readJsonFile(calendarPath, isJSON) {
         return reject(err); // Если произошла ошибка, отклоняем промис
       }
       try {
-        let dataOnFile;
+        let dateOnFile;
         if (isJSON) {
-          dataOnFile = JSON.parse(data); // Преобразуем JSON-строку в объект
+          dateOnFile = JSON.parse(data); // Преобразуем JSON-строку в объект
         } else {
-          dataOnFile = data;
+          dateOnFile = data;
         }
-        resolve(dataOnFile); // Возвращаем объект
+        resolve(dateOnFile); // Возвращаем объект
       } catch (parseError) {
         reject(parseError); // Если произошла ошибка разбора JSON, отклоняем промис
       }
@@ -115,7 +115,16 @@ function readJsonFile(calendarPath, isJSON) {
 const executeTask = () => {
   readJsonFile(calendarPath, true)
     .then((data) => {
-      // Здесь вы можете работать с данными
+        
+    let currMonth = parseInt(new Date().getMonth() + 1),
+            currDate =  new Date().getDate(),
+            currMonthInCalendar = data.months.filter(el=>el.month ===  parseInt(new Date().getMonth() + 1))
+        
+        if(currMonthInCalendar[0].days.split(',').filter(el=>parseInt(el)===currDate).length){
+            console.log('Нерабочий день!');
+            return;
+        }
+        // Здесь вы можете работать с данными
       sendMessage(chatId, new Date().toISOString())
         .then(() => {
           console.log("Сообщение отправлено успешно!");
