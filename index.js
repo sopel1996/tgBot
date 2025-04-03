@@ -12,7 +12,7 @@ const schedule = require("node-schedule");
 // Запускаем бота
 bot.start();
 
-let chatId = "-4724682422"; // Замените на ID чата
+let chatId = "-1002544218495"; // Замените на ID чата
 const message = "Это тестовое сообщение от бота!";
 const calendarPath = "calendar.json";
 
@@ -34,7 +34,7 @@ bot.on("message", async (ctx) => {
 
 
     // const stickerId = 'CAACAgIAAxkBAAEYxY9hQMT6umJxCEzi9LMa3I96F10zPQACWgEAAkgfiV-Dc03mMkC89ysE'; // Пример ID стикера
-    // ctx.replyWithAnimation('CgACAgQAAxkBAAIBDWftOxDsR53yqmU-lV7bTsnYqmvpAAIBAwACkjoFU8sQ41jq3iuhNgQ'); // Отправка стикера
+    ctx.replyWithAnimation('CgACAgQAAxkBAAIBDWftOxDsR53yqmU-lV7bTsnYqmvpAAIBAwACkjoFU8sQ41jq3iuhNgQ'); // Отправка стикера
 
     
     console.log('ctx',ctx.message)
