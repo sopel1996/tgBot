@@ -70,7 +70,7 @@ bot.on("message", async (ctx) => {
     );
 
     const job = schedule.scheduleJob(dateToJob, function () {
-      sendMessage(chatId, "Подключаемся!!!")
+      sendMessage(chatId, '@all \n Подключаемся! \n https://telemost.yandex.ru/j/46103613183207')
         .then(() => {
           console.log("Сообщение отправлено успешно!");
         })
