@@ -125,7 +125,7 @@ const executeTask = () => {
             return;
         }
         // Здесь вы можете работать с данными
-      sendMessage(chatId, new Date().toISOString())
+      sendMessage(chatId, '@all \n Подключаемся! \n https://telemost.yandex.ru/j/46103613183207')
         .then(() => {
           console.log("Сообщение отправлено успешно!");
         })
@@ -167,6 +167,7 @@ readJsonFile("output.json", false)
         +time.split(":")[1],
         0
       );
+      
       const job = schedule.scheduleJob(dateToJob, function () {
         executeTask();
         console.log("Задача создана");
