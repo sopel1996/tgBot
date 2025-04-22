@@ -69,15 +69,7 @@ bot.on("message", async (ctx) => {
       }
     );
 
-    const job = schedule.scheduleJob(dateToJob, function () {
-      sendMessage(chatId, '@all \n Подключаемся! \n https://telemost.yandex.ru/j/46103613183207')
-        .then(() => {
-          console.log("Сообщение отправлено успешно!");
-        })
-        .catch((error) => {
-          console.error("Ошибка при отправке сообщения:", error);
-        });
-    });
+    const job = schedule.scheduleJob(dateToJob, executeTask);
 
     await ctx.reply(`Установлено напоминание о митапе ${date} в ${time}`);
   } else {
@@ -125,7 +117,7 @@ const executeTask = () => {
             return;
         }
         // Здесь вы можете работать с данными
-      sendMessage(chatId, '@all \n Подключаемся! \n https://telemost.yandex.ru/j/46103613183207')
+      sendMessage(chatId, 'Подключаемся! \n https://telemost.yandex.ru/j/46103613183207')
         .then(() => {
           console.log("Сообщение отправлено успешно!");
         })
